@@ -1,10 +1,7 @@
-from flask import Flask, request, render_template, templating,json,jsonify,redirect
-import requests
-import os
+from flask import Flask, request, render_template,redirect
 import re
 import json
 import glob
-from jinja2 import Environment, BaseLoader
 import random
 
 
