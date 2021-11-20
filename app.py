@@ -51,7 +51,7 @@ def find():
             at_least_one = True
     people_add += "</ul>"
     if at_least_one:
-        return people_add
+        return people_add+"<a href=http://localhost:5000/>Home Page</a>"
     else:
         not_found = "The Name \""+name_searched+"\" Was Not Found"
         return render_template("main.html", title=str(name_searched), jsonfile=not_found)
