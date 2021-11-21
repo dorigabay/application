@@ -9,10 +9,10 @@
 <p><a href="/all">Everyone Please</a></p>
 <p><a href="/search_people">Someone please</a></p>
 
-<h4>{{jsonfile}}</h4>
 <form method ='POST' action="/search_people">
     <input name="search">
     <input type="submit" value="Search">
 </form>
+{{ persone|safe }}
 </body>
 </html>

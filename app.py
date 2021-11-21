@@ -23,7 +23,7 @@ def list_people():
     for names in dict_people.keys():
         people_add += "\n<li><a href=/someone/"+str(names).replace(" ","_")+">"+str(names)+"</a></li>"
     people_add += "</ul>"
-    return people_add
+    return render_template("main.html",title = "Search Engine",persone=people_add)
 
 @app.route("/someone/<name>")
 def persone(name):
@@ -31,8 +31,8 @@ def persone(name):
     sti = "<h2>"+name.replace("_"," ")+"</h2><ul>"
     for details in n.keys():
         sti += "<li>"+str(details)+": "+str(n[details])+"</li>"
-    sti+="</ul><a href=http://localhost:5000/>Home Page</a>"
-    return sti
+    sti+="</ul><a href=http://localhost:5000/>clear</a>"
+    return render_template("main.html",title = "Search Engine", persone=sti)
 
 @app.route("/search_people", methods=['GET'])
 def search():
@@ -43,7 +43,7 @@ def search():
 @app.route("/search_people", methods=['POST'])
 def find():
     name_searched = request.form.get("search").lower()
-    people_add = "<h2>Results:</h2><ul>"
+    people_add = "<ul>"
     at_least_one = False
     for names in dict_people.keys():
         if re.search(r".*"+name_searched+".*",names.lower()):
@@ -51,10 +51,10 @@ def find():
             at_least_one = True
     people_add += "</ul>"
     if at_least_one:
-        return people_add+"<a href=http://localhost:5000/>Home Page</a>"
+        return render_template("main.html",title = "Search Engine", persone=people_add)
     else:
-        not_found = "The Name \""+name_searched+"\" Was Not Found"
-        return render_template("main.html", title=str(name_searched), jsonfile=not_found)
+        not_found = "<h4>"+"The Name \""+name_searched+"\" Was Not Found"+"<h4>"
+        return render_template("main.html", title=str(name_searched), persone=not_found)
 
 
 app.run(host='localhost', debug=True)
